@@ -10,10 +10,9 @@
  * ========================================
 */
 #include "isr_UART.h"
-#include "stdio.h"
 
-CY_ISR(Custom_UART_ISR)
-{
+
+CY_ISR(Custom_UART_ISR){
     if(UART_ReadRxStatus() == UART_RX_STS_FIFO_NOTEMPTY){
         received = UART_ReadRxData();
         Timer_WriteCounter(MAX);

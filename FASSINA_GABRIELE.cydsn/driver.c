@@ -11,8 +11,7 @@
 */
 #include "project.h"
 #include "driver.h"
-#include "isr_UART.h"
-#include "isr_Timer.h"
+
 
 #define IDLE 1
 #define HEADER 2
@@ -23,9 +22,11 @@
 #define MAX 250
 
 /* this function is aimed to set the PWM parameters needed to obtain the patterns specified*/
-
+    uint8_t state;
+    uint8_t received;
 
 void RGBLed_WriteColor(){
+    
             switch (state){
                 
                 case IDLE:

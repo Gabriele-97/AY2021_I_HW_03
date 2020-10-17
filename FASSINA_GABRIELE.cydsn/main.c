@@ -21,24 +21,22 @@
 #define BLUERECEIVED 5
 #define TAIL 6
 
-CY_ISR(Custom_TIMER_ISR); 
-CY_ISR(Custom_UART_ISR); 
-void RGBLed_WriteColor();
-
+uint8_t state = IDLE;
+uint8_t received;
 
 int main(void)
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
-    isr_timer_StartEx(Custom_TIMER_ISR);
-    Timer_Start();
+    PWM_RG_Start();
+    PWM_B_Start();
     isr_UART_StartEx(Custom_UART_ISR);
-    UART_Start();
-    
+    isr_TIMER_StartEx(Custom_TIMER_ISR);
+    RGBLed_WriteColor();  
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
 
     for(;;)
     {
-        RGBLed_WriteColor();
+      
         /* Place your application code here. */
     }
 }
