@@ -10,9 +10,10 @@
  * ========================================
 */
 #include "project.h"
-#include "isr_Timer.h"
-#include "isr_UART.h"
+#include "InterruptTimer.h"
+#include "InterruptUART.h"
 #include "driver.h"
+
 
 #define IDLE 1
 #define HEADER 2
@@ -22,22 +23,25 @@
 #define TAIL 6
 
 uint8_t state = IDLE;
-uint8_t received;
+uint16_t received;
 
 int main(void)
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
     PWM_RG_Start();
     PWM_B_Start();
+    UART_Start();
     isr_UART_StartEx(Custom_UART_ISR);
+    Timer_Start();
     isr_TIMER_StartEx(Custom_TIMER_ISR);
-    RGBLed_WriteColor();  
+    
+    
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-
+    
     for(;;)
     {
-      
-        /* Place your application code here. */
+      RGBLed_WriteColor();
+      CyDelay(200);
     }
 }
 

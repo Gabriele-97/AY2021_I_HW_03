@@ -9,13 +9,13 @@
  *
  * ========================================
 */
-#include "isr_UART.h"
 
-
-CY_ISR(Custom_UART_ISR){
-    if(UART_ReadRxStatus() == UART_RX_STS_FIFO_NOTEMPTY){
-        received = UART_ReadRxData();
-        Timer_WriteCounter(MAX);
-    }
-}
-/* [] END OF FILE */
+#ifndef __INTERRUPT_TIMER_H__
+    // Header guard
+    #define __INTERRUPT_TIMER_H__
+    #include "project.h"
+    extern uint8_t state;
+    
+    CY_ISR_PROTO(Custom_TIMER_ISR);;
+    
+#endif

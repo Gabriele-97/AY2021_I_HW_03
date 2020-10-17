@@ -9,7 +9,8 @@
  *
  * ========================================
 */
-#include "isr_Timer.h"
+#include "InterruptTimer.h"
+uint8_t state;
 #define IDLE 1
 
 CY_ISR(Custom_TIMER_ISR)
@@ -19,4 +20,3 @@ CY_ISR(Custom_TIMER_ISR)
     // return to first state
     state = IDLE;
 }
-/* [] END OF FILE */

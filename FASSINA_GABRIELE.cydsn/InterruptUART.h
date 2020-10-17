@@ -9,15 +9,16 @@
  *
  * ========================================
 */
-
-#ifndef _INTERRUPT_TIMER_H_
+#ifndef __ISR_UART_H__
     // Header guard
-    #define _INTERRUPT_TIMER_H_
-    
+    #define __ISR_UART_H__
+    #define MAX 250
     #include "project.h"
-    extern uint8_t state;
-    
-    CY_ISR_PROTO(Custom_TIMER_ISR);
+    extern uint16_t received;
+    /**
+    *   \brief ISR Code.
+    */
+    CY_ISR_PROTO(Custom_UART_ISR);
     
 #endif
 /* [] END OF FILE */

@@ -23,7 +23,7 @@
 
 /* this function is aimed to set the PWM parameters needed to obtain the patterns specified*/
     uint8_t state;
-    uint8_t received;
+    uint16_t received;
 
 void RGBLed_WriteColor(){
     
@@ -61,7 +61,6 @@ void RGBLed_WriteColor(){
                     }
                     else{
                         PWM_B_WriteCompare(received);
-                        
                         state++;
                     }
                     break;        
