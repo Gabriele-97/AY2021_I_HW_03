@@ -27,6 +27,7 @@ uint8_t received;
 char flag_timer =0;
 char flag = 0;
 
+
 int main(void)
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
@@ -35,8 +36,8 @@ int main(void)
     UART_Start();
     isr_UART_StartEx(Custom_UART_ISR);
     Timer_Start();
-    isr_TIMER_StartEx(Custom_TIMER_ISR);
-    
+    isr_timer_StartEx(Custom_TIMER_ISR);
+    UART_PutString("inserisci header");
     
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
     

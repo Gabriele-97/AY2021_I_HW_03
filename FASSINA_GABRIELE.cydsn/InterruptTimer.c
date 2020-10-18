@@ -12,12 +12,15 @@
 #include "InterruptTimer.h"
 uint8_t state;
 #define IDLE 1
+#define BLUERECEIVED 5
 
 CY_ISR(Custom_TIMER_ISR)
 {
     // interrupt is verified
     Timer_ReadStatusRegister();
     // return to first state
-    state = IDLE;
-    flag_timer = 1;
+    if(state != IDLE && state!= BLUERECEIVED)
+        flag_timer = 1;
+    
+    
 }

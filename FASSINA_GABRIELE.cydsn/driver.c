@@ -37,6 +37,9 @@ void RGBLed_WriteColor(){
                     if(received == 0xA0){
                         UART_PutString("inserisci RGB rosso\n");
                         state++;}
+                    else if (received == 'v'){
+                        UART_PutString("RGB LED Program $$$");
+                    }
                         
                     else 
                         UART_PutString("header errato");
@@ -89,21 +92,19 @@ void RGBLed_WriteColor(){
                     if(received == 0xC0){
                         UART_PutString("Inserisci Header\n");
                         state = IDLE;
-                        
                     }
                     else 
                         UART_PutString("tail errato");
                 }
                 flag =0;
                     break;   
-                
-                
-            
+              
             }
             
-    if (flag_timer ==1){
-        UART_PutString("inserisci header\n");
+    if (flag_timer == 1 ){
+        UART_PutString("tempo scaduto! inserisci header\n");
         flag_timer = 0;
+        state = IDLE;
     }
 }
 /* [] END OF FILE */
