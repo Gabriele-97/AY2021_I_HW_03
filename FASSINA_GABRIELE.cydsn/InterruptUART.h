@@ -14,7 +14,7 @@
     #define __ISR_UART_H__
     #define MAX 250
     #include "project.h"
-    extern uint16_t received;
+    extern uint8_t received;
     /**
     *   \brief ISR Code.
     */

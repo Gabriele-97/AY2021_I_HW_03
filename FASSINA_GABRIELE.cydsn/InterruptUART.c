@@ -11,12 +11,18 @@
 */
 #include "InterruptUART.h"
 #include "project.h"
-
+extern char flag;
 
 CY_ISR(Custom_UART_ISR){
-    while(UART_ReadRxStatus() != UART_RX_STS_FIFO_NOTEMPTY);
+    
+    if(UART_ReadRxStatus() == UART_RX_STS_FIFO_NOTEMPTY){
         received = UART_ReadRxData();
         Timer_WriteCounter(MAX);
+        flag =1;
+    }
+    
+    else
+        flag = 0;
     }
 
 /* [] END OF FILE */

@@ -19,4 +19,5 @@ CY_ISR(Custom_TIMER_ISR)
     Timer_ReadStatusRegister();
     // return to first state
     state = IDLE;
+    flag_timer = 1;
 }

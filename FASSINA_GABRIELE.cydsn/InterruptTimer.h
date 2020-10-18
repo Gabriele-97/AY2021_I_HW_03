@@ -15,6 +15,7 @@
     #define __INTERRUPT_TIMER_H__
     #include "project.h"
     extern uint8_t state;
+    extern char flag_timer;
     
     CY_ISR_PROTO(Custom_TIMER_ISR);;
     

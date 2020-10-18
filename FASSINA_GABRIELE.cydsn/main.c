@@ -23,7 +23,9 @@
 #define TAIL 6
 
 uint8_t state = IDLE;
-uint16_t received;
+uint8_t received;
+char flag_timer =0;
+char flag = 0;
 
 int main(void)
 {
@@ -41,7 +43,6 @@ int main(void)
     for(;;)
     {
       RGBLed_WriteColor();
-      CyDelay(200);
     }
 }
 
