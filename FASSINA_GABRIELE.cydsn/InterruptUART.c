@@ -19,10 +19,10 @@ CY_ISR(Custom_UART_ISR){
         received = UART_ReadRxData();
         Timer_WriteCounter(MAX);
         flag =1;
+        
     }
     
-    else
-        flag = 0;
+   
     }
 
 /* [] END OF FILE */

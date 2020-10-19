@@ -26,6 +26,10 @@
     uint8_t received;
     char flag;
     char flag_timer;
+    char correct_string;
+    uint8_t rosso;
+    uint8_t verde;
+    uint8_t blue;
     
 
 void RGBLed_WriteColor(){
@@ -35,16 +39,17 @@ void RGBLed_WriteColor(){
                 case IDLE:
                 if (flag == 1){
                     if(received == 0xA0){
-                        UART_PutString("inserisci RGB rosso\n");
+                        //UART_PutString("inserisci RGB rosso\n");
+                        flag = 0;
                         state++;}
-                    else if (received == 'v'){
-                        UART_PutString("RGB LED Program $$$");
+                    //else if (received == 'v'){
+                        //UART_PutString("RGB LED Program $$$");
                     }
                         
-                    else 
+                    /*else 
                         UART_PutString("header errato");
-                }
-                flag = 0;
+                }*/
+                
                     break;
                 
                 case HEADER:
@@ -52,12 +57,13 @@ void RGBLed_WriteColor(){
                     if(received < 0x00 || received>0xff)
                         UART_PutString("valore errato");
                     else{
-                        PWM_RG_WriteCompare1(received);
-                        UART_PutString("inserisci RGB verde\n");
+                        rosso = received;
+                        //UART_PutString("inserisci RGB verde\n");
+                        flag =0;
                         state++;}
                         
                 }
-                flag =0;
+                
                     break;
                         
                 case REDRECEIVED:
@@ -65,12 +71,13 @@ void RGBLed_WriteColor(){
                     if(received < 0 || received>255)
                         UART_PutString("valore errato");
                     else{
-                        PWM_RG_WriteCompare2(received);
-                        UART_PutString("inserisci RGB blu\n");
+                        verde = received;
+                        //UART_PutString("inserisci RGB blu\n");
+                        flag = 0;
                         state++;}
                         
                 }
-                flag = 0;
+                
                     break;  
                         
                 case GREENRECEIVED:
@@ -79,26 +86,32 @@ void RGBLed_WriteColor(){
                         UART_PutString("valore errato");
                                    
                     else{
-                        PWM_B_WriteCompare(received);
-                        UART_PutString("inserisci tail code\n");
+                        blue = received;
+                        //UART_PutString("inserisci tail code\n");
+                        flag = 0;
                         state++;}
                     }
                     
-                flag = 0;
+                
                     break;        
                 
                 case BLUERECEIVED:
                 if (flag == 1){
                     if(received == 0xC0){
-                        UART_PutString("Inserisci Header\n");
+                        correct_string =1; 
+                        //UART_PutString("Inserisci Header\n");
+                        flag =0;
                         state = IDLE;
                     }
-                    else 
-                        UART_PutString("tail errato");
+                    //else 
+                     //   UART_PutString("tail errato");
+                
+                
                 }
-                flag =0;
+                
                     break;   
               
+            
             }
             
     if (flag_timer == 1 ){
@@ -106,5 +119,18 @@ void RGBLed_WriteColor(){
         flag_timer = 0;
         state = IDLE;
     }
+    
+    if (correct_string ==1){
+                        PWM_RG_WriteCompare1(rosso);
+                        PWM_RG_WriteCompare2(verde);
+                        PWM_B_WriteCompare(blue);
+                        correct_string =0;
+    }
+   if (flag == 1){ 
+    if (received == 'v')
+        UART_PutString("RGB LED Program $$$");
+        flag =0;
 }
+}
+
 /* [] END OF FILE */

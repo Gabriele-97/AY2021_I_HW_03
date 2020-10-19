@@ -252,6 +252,7 @@
   <Group key="DWRInstGuidMapping">
     <Group key="Interrupt">
       <Data key="383d5a72-a191-4d6e-ad0c-d34a636ea8bc" value="isr_UART" />
+      <Data key="3587510c-1abd-4d15-aad8-c87fd698f1a4" value="isr_timer" />
       <Data key="c8e900cd-6319-4062-aea5-c476d1a66724" value="isr_timer" />
     </Group>
     <Group key="Pin">
@@ -3347,6 +3348,13 @@
   </Group>
   <Group key="Interrupt">
     <Group key="383d5a72-a191-4d6e-ad0c-d34a636ea8bc">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="7" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="3587510c-1abd-4d15-aad8-c87fd698f1a4">
       <Group key="CortexM3">
         <Data key="Assigned" value="True" />
         <Data key="Priority" value="6" />
