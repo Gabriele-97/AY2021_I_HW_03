@@ -15,14 +15,12 @@ extern char flag;
 
 CY_ISR(Custom_UART_ISR){
     
-    if(UART_ReadRxStatus() == UART_RX_STS_FIFO_NOTEMPTY){
-        received = UART_ReadRxData();
-        Timer_WriteCounter(MAX);
-        flag =1;
-        
+    if(UART_ReadRxStatus() == UART_RX_STS_FIFO_NOTEMPTY){     
+        received = UART_ReadRxData(); //I save the received byte in a variable
+        Timer_WriteCounter(MAX); //i reinitialize the counter of the timer to the max (250)
+        flag =1; //This flag means a new data has been received 
+      
     }
-    
-   
     }
 
 /* [] END OF FILE */
